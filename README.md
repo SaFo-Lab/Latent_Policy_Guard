@@ -33,8 +33,6 @@ bash scripts/train.sh
 
 `train.sh` is a thin wrapper around `python train.py …`. Any dataclass field declared in `src/model.py` (`ModelArguments`, `TrainingArguments`, `DataArguments`) can be overridden by appending its `--flag` to the command line.
 
-The reference configuration follows the paper: `m₁ = 4`, `m₂ = 6` latent tokens; LoRA rank 128 with α = 32 over all attention and MLP projections; a 2-layer linear projection of dimension 2560; AdamW at lr 5×10⁻⁵; DeepSpeed ZeRO-2 in bf16; ~3 epochs on 4× A100 (80 GB). Checkpoints are written to `outputs/<expt>/<base-model>/ep_<E>/lr_<LR>/seed_<S>/checkpoint-<step>/` and load directly into the evaluation pipeline.
-
 ## Evaluation
 
 Models and datasets are plugged together through lightweight registries; adding a new system means dropping in one file under `evaluation/models/` or `evaluation/datasets/`.
@@ -61,10 +59,13 @@ Released under the MIT License — see [`LICENSE`](LICENSE).
 ## Citation
 
 ```bibtex
-@inproceedings{lpg2026,
-  title  = {LPG: Balancing Efficiency and Policy Reasoning in Latent Policy Guardrails},
-  author = {Anonymous Authors},
-  year   = {2026},
-  note   = {Under review}
+@misc{li2026lpgbalancingefficiencypolicy,
+      title={LPG: Balancing Efficiency and Policy Reasoning in Latent Policy Guardrails}, 
+      author={Nanxi Li and Zhengyue Zhao and Chaowei Xiao},
+      year={2026},
+      eprint={2605.17329},
+      archivePrefix={arXiv},
+      primaryClass={cs.CR},
+      url={https://arxiv.org/abs/2605.17329}, 
 }
 ```
