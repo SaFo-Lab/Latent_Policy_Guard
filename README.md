@@ -11,7 +11,18 @@ pip install -r requirements.txt
 
 ## Training
 
-The release ships the final training set at `training/data/train_data.jsonl` (~19k records assembled from BeaverTails, Aegis v2, Toxic-Chat, SaladBench, XSTest v2 and WildGuardMix, with per-example randomised policy lists and LLM-rewritten reasoning). Each line is one example with the schema:
+The full training set (**40k records**) is hosted on the Hugging Face Hub at [`andyc03/latent-policy-guard-40k`](https://huggingface.co/datasets/andyc03/latent-policy-guard-40k). It is assembled from DynaBench, GuardSet-X, BeaverTails, Aegis v2, SaladBench, Toxic-Chat and XSTest v2, with per-example randomised policy lists and teacher-grounded LLM reasoning. See the [dataset card](https://huggingface.co/datasets/andyc03/latent-policy-guard-40k) for the full per-source breakdown and source-dataset attribution.
+
+Download it into `training/data/` before training:
+
+```bash
+cd training
+pip install -U "huggingface_hub[cli]"
+hf download andyc03/latent-policy-guard-40k train_data_lpg_40k.jsonl \
+    --repo-type dataset --local-dir data
+```
+
+Each line is one example with the schema:
 
 ```json
 {
@@ -26,7 +37,7 @@ To train:
 ```bash
 cd training
 MODEL_PATH=Qwen/Qwen3-4B \
-DATA_PATH=data/train_data.jsonl \
+DATA_PATH=data/train_data_lpg_40k.jsonl \
 NUM_GPUS=4 \
 bash scripts/train.sh
 ```
